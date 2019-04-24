@@ -130,16 +130,17 @@ def get_arrival():
     hour = hour - hour % 3
     hour = hour + 9
     if hour>24:
-        hour = 0
-    #print(hour)
-    arrival = today.strftime('%Y') + '-' + today.strftime('%m') + '-' + day + ' ' + str(hour) + ':00:00'
+        newhour = hour - 24
+        hour = newhour
+        day = 1 + int(day)
+    arrival = today.strftime('%Y') + '-' + today.strftime('%m') + '-' + str(day) + ' ' + str(hour) + ':00:00'
     #arrival = t
     return arrival
 
 def get_forecast(arrival, weather_data):
     for forecast in weather_data['list']:
         if forecast['dt_txt'] == arrival:
-                return forecast
+            return forecast
 
 def get_readable_forecast(forecast):
     weather = float(forecast['main']['temp']) #this now gives a single number for weather in kelvin
@@ -147,7 +148,7 @@ def get_readable_forecast(forecast):
 
 def main(city):
     try:
-        city_id = get_city_id()
+        #city_id = get_city_id()
         #print(datetime.now())
         #asks user for city id
         #weather_data = get_weather_data(city_id)
@@ -157,7 +158,6 @@ def main(city):
         arrival = get_arrival()
         #asks user for arrival time
         forecast = get_forecast(arrival, weather_data)
-        #print(forecast)
         #writes forecast
         weather = get_readable_forecast(forecast)
         #retrieves just the temp
@@ -166,8 +166,8 @@ def main(city):
         new_weather = (fahrenheit * 1.8) + 32
         newer_weather = round(new_weather, 1)
         #converts kelvin to fahrenheit
+        print('the weather in fahrenheit is: ')
         pprint(newer_weather) 
-        pprint(weather)
         #pprint(time.asctime(time.localtime(time.time())))
         #prints weather in fahrenheit
         
@@ -181,26 +181,35 @@ if __name__ == "__main__":
     #main()
     while True:
         if GPIO.input(10) == GPIO.HIGH: #Aspen uses pin input 10
+            print('Aspen')
             main(5412230)
             break
         elif GPIO.input(12) == GPIO.HIGH: #Copper uses pin input 12
+            print('Copper')
             main(5422503)
             break
-        elif GPIO.input(16) == GPIO.HIGH: #Eldora uses pin input 16
+        elif GPIO.input(26) == GPIO.HIGH: #Eldora uses pin input 16
+            print('Eldora')
             main(5432410)
             break
         elif GPIO.input(18) == GPIO.HIGH: #Steamboat uses pin input 18
+            print('Steamboat')
             main(5582371)
             break
         elif GPIO.input(22) == GPIO.HIGH: #Vail uses pin input 22
-            main(5319311)
+            print('Vail')
+            main(5442727)
             break
-        elif GPIO.input(5) == GPIO.HIGH: #Telluride  uses pin input 24
+        elif GPIO.input(16) == GPIO.HIGH: #Telluride  uses pin input 24
+            print('Telluride')
             main(5441199)
             break
-        elif GPIO.input(26) == GPIO.HIGH: #Breckenridge uses pin input 26
+        elif GPIO.input(3) == GPIO.HIGH: #Breckenridge uses pin input 26
+            print('Breckenridge')
             main(4676181)
             break
-        elif GPIO.input(3) == GPIO.HIGH: #Winter park uses pin input 3
-            main(4178560)
+        elif GPIO.input(5) == GPIO.HIGH: #Winter park uses pin input 3
+            print('Winter Park')
+            main(5425043)
             break
+
