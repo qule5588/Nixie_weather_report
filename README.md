@@ -25,6 +25,8 @@ GPIO.setup(9, GPIO.IN)
 GPIO.setup(11, GPIO.IN)
 GPIO.setup(27, GPIO.IN)
 GPIO.setup(8, GPIO.IN)
+GPIO.setup(7, GPIO.OUT)
+
 
 KEY = '0c04e5ddacbc68d164d7af4e9a487982'
 
@@ -171,11 +173,15 @@ def main(city):
         pprint(newer_weather) 
         #pprint(time.asctime(time.localtime(time.time())))
         #prints weather in fahrenheit
+
+        if newer_weather < 0:
+            GPIO.setup(7, GPIO.HIGH)
         
         nixie = Nixie(PIN_DATA, PIN_LATCH, PIN_CLK, 3)
         nixie.set_value(newer_weather)
         time.sleep(5.00)
         nixie.set_value(000)
+        GPIO.setup(7, GPIO.LOW)
 
     finally:
         #GPIO.cleanup()
@@ -217,6 +223,7 @@ if __name__ == "__main__":
             main(5425043)
             #break
         elif GPIO.input(8):
-            print('Program has been terminated')
             GPIO.cleanup()
+            
+
             
