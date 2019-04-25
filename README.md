@@ -16,14 +16,15 @@ PIN_CLK = 25
 
 GPIO.setwarnings(False)
 GPIO.setmode(GPIO.BCM)
-GPIO.setup(10, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
-GPIO.setup(12, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
-GPIO.setup(16, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
-GPIO.setup(18, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
-GPIO.setup(22, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
-GPIO.setup(5, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
-GPIO.setup(26, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
-GPIO.setup(3, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
+GPIO.setup(4, GPIO.IN)
+GPIO.setup(17, GPIO.IN)
+GPIO.setup(22, GPIO.IN)
+GPIO.setup(18, GPIO.IN)
+GPIO.setup(10, GPIO.IN)
+GPIO.setup(9, GPIO.IN)
+GPIO.setup(11, GPIO.IN)
+GPIO.setup(27, GPIO.IN)
+GPIO.setup(8, GPIO.IN)
 
 KEY = '0c04e5ddacbc68d164d7af4e9a487982'
 
@@ -173,6 +174,8 @@ def main(city):
         
         nixie = Nixie(PIN_DATA, PIN_LATCH, PIN_CLK, 3)
         nixie.set_value(newer_weather)
+        time.sleep(5.00)
+        nixie.set_value(000)
 
     finally:
         GPIO.cleanup()
@@ -180,36 +183,39 @@ def main(city):
 if __name__ == "__main__":
     #main()
     while True:
-        if GPIO.input(10) == GPIO.HIGH: #Aspen uses pin input 10
+        if GPIO.input(4): #Aspen uses pin input 10
             print('Aspen')
             main(5412230)
-            break
-        elif GPIO.input(12) == GPIO.HIGH: #Copper uses pin input 12
+            #break
+        elif GPIO.input(17): #Copper uses pin input 12
             print('Copper')
             main(5422503)
-            break
-        elif GPIO.input(26) == GPIO.HIGH: #Eldora uses pin input 16
+            #break
+        elif GPIO.input(11): #Eldora uses pin input 16
             print('Eldora')
             main(5432410)
-            break
-        elif GPIO.input(18) == GPIO.HIGH: #Steamboat uses pin input 18
+            #break
+        elif GPIO.input(22): #Steamboat uses pin input 18
             print('Steamboat')
             main(5582371)
-            break
-        elif GPIO.input(22) == GPIO.HIGH: #Vail uses pin input 22
+            #break
+        elif GPIO.input(18): #Vail uses pin input 22
             print('Vail')
             main(5442727)
-            break
-        elif GPIO.input(16) == GPIO.HIGH: #Telluride  uses pin input 24
+            #break
+        elif GPIO.input(10): #Telluride  uses pin input 24
             print('Telluride')
             main(5441199)
-            break
-        elif GPIO.input(3) == GPIO.HIGH: #Breckenridge uses pin input 26
+            #break
+        elif GPIO.input(9): #Breckenridge uses pin input 26
             print('Breckenridge')
             main(4676181)
-            break
-        elif GPIO.input(5) == GPIO.HIGH: #Winter park uses pin input 3
+            #break
+        elif GPIO.input(27): #Winter park uses pin input 3
             print('Winter Park')
             main(5425043)
-            break
-
+            #break
+        elif GPIO.input(8):
+            print('Program has been terminated')
+            GPIO.cleanup()
+            
