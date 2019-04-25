@@ -178,7 +178,8 @@ def main(city):
         nixie.set_value(000)
 
     finally:
-        GPIO.cleanup()
+        #GPIO.cleanup()
+        return
 
 if __name__ == "__main__":
     #main()
