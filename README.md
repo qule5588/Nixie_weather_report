@@ -24,8 +24,8 @@ GPIO.setup(10, GPIO.IN)
 GPIO.setup(9, GPIO.IN)
 GPIO.setup(11, GPIO.IN)
 GPIO.setup(27, GPIO.IN)
-GPIO.setup(8, GPIO.IN)
 GPIO.setup(7, GPIO.OUT)
+GPIO.setup(8, GPIO.OUT)
 
 
 KEY = '0c04e5ddacbc68d164d7af4e9a487982'
@@ -176,6 +176,7 @@ def main(city):
 
         if newer_weather < 0:
             GPIO.setup(7, GPIO.HIGH)
+            GPIO.setup(8, GPIO.HIGH)
         
         nixie = Nixie(PIN_DATA, PIN_LATCH, PIN_CLK, 3)
         nixie.set_value(newer_weather)
@@ -222,8 +223,12 @@ if __name__ == "__main__":
             print('Winter Park')
             main(5425043)
             #break
-        elif GPIO.input(8):
+        elif GPIO.input(11) & GPIO.input(17):
             GPIO.cleanup()
+            
+        
+            
+
             
 
             
