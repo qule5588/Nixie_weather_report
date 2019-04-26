@@ -191,35 +191,35 @@ def main(city):
 if __name__ == "__main__":
     #main()
     while True:
-        if GPIO.input(4): #Aspen uses pin input 10
+        if GPIO.input(27): #Aspen uses pin input 10
             print('Aspen')
             main(5412230)
             #break
-        elif GPIO.input(17): #Copper uses pin input 12
+        elif GPIO.input(11): #Copper uses pin input 12
             print('Copper')
             main(5422503)
             #break
-        elif GPIO.input(11): #Eldora uses pin input 16
+        elif GPIO.input(17): #Eldora uses pin input 16
             print('Eldora')
             main(5432410)
             #break
-        elif GPIO.input(22): #Steamboat uses pin input 18
+        elif GPIO.input(10): #Steamboat uses pin input 18
             print('Steamboat')
             main(5582371)
             #break
-        elif GPIO.input(18): #Vail uses pin input 22
+        elif GPIO.input(9): #Vail uses pin input 22
             print('Vail')
             main(5442727)
             #break
-        elif GPIO.input(10): #Telluride  uses pin input 24
+        elif GPIO.input(4): #Telluride  uses pin input 24
             print('Telluride')
             main(5441199)
             #break
-        elif GPIO.input(9): #Breckenridge uses pin input 26
+        elif GPIO.input(18): #Breckenridge uses pin input 26
             print('Breckenridge')
             main(4676181)
             #break
-        elif GPIO.input(27): #Winter park uses pin input 3
+        elif GPIO.input(22): #Winter park uses pin input 3
             print('Winter Park')
             main(5425043)
             #break
